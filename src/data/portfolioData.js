@@ -29,11 +29,11 @@ export const projects = [
     demo: 'https://e-learning-ui.vercel.app',
   },
   {
-    title: 'Portfolio Website',
+    title: ' myPortfolio Website',
     description: 'Personal portfolio website showcasing skills, certificates, contact details, and projects.',
     technologies: ['React', 'CSS'],
-    github: 'https://github.com/yourusername/portfolio',
-    demo: 'https://your-portfolio.netlify.app',
+    github: 'https://github.com/hibr12/my-portfolio.git',
+    demo: 'https://my-portfolio-mu-rosy-93.vercel.app/',
   },
 ];
 
