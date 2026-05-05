@@ -6,6 +6,7 @@ export const projects = [
     technologies: ['React', 'Node.js'],
     github: 'https://github.com/hibr12/memorygame.git',
     demo: 'https://e-learning-platform-bp4t.vercel.app/',
+    image: '/assets/image/memorygame.png',
   },
   {
     title: 'Online Library System',
@@ -13,6 +14,7 @@ export const projects = [
     technologies: ['React', 'Node.js', 'Express', 'MySQL'],
     github: 'https://github.com/hibr12/onlinelibrary.git',
     demo: 'https://onlinelibrary.vercel.app',
+    image: '/assets/image/onlinelibrary.png',
   },
   {
     title: 'Scientific Calculator',
@@ -20,6 +22,7 @@ export const projects = [
     technologies: ['c++', 'Dart', 'Swift', 'html','other'],
     github: 'https://github.com/hibr12/calculator-app.git',
     demo: 'https://scientific-calculator.vercel.app',
+    image: '/assets/image/calculator.png',
   },
   {
     title: 'E-learning UI',
@@ -27,6 +30,7 @@ export const projects = [
     technologies: ['React', 'CSS', 'JavaScript'],
     github: 'https://github.com/hibr12/e-learning-platform-hibrlearn.git',
     demo: 'https://e-learning-ui.vercel.app',
+    image: '/assets/image/e-learning.png',
   },
   {
     title: ' my Portfolio Website',

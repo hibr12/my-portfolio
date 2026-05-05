@@ -21,7 +21,11 @@ function Hero() {
 
       <div className="hero__visual reveal" aria-label="Developer profile summary">
         <div className="profile-panel">
-          <div className="profile-panel__avatar">YN</div>
+          <img
+            className="profile-panel__avatar"
+            src="/assets/image/hib2.jpg"
+            alt="Hibru Yitayew"
+          />
           <div>
             <span>Full-stack learner</span>
             <strong>React + Node.js</strong>

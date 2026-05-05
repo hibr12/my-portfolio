@@ -1,6 +1,29 @@
 function ProjectCard({ project }) {
+  const openGithub = () => {
+    window.open(project.github, '_blank', 'noopener,noreferrer');
+  };
+
+  const handleKeyDown = (event) => {
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      openGithub();
+    }
+  };
+
+  const stopCardClick = (event) => {
+    event.stopPropagation();
+  };
+
   return (
-    <article className="card project-card reveal">
+    <article
+      className="card project-card reveal"
+      style={project.image ? { '--project-image': `url(${project.image})` } : undefined}
+      role="link"
+      tabIndex={0}
+      aria-label={`Open ${project.title} GitHub repository`}
+      onClick={openGithub}
+      onKeyDown={handleKeyDown}
+    >
       <div>
         <p className="eyebrow">Featured Project</p>
         <h3>{project.title}</h3>
@@ -14,11 +37,11 @@ function ProjectCard({ project }) {
       </div>
 
       <div className="card__actions">
-        <a href={project.github} target="_blank" rel="noreferrer">
+        <a href={project.github} target="_blank" rel="noreferrer" onClick={stopCardClick}>
           GitHub
         </a>
         {project.demo && (
-          <a href={project.demo} target="_blank" rel="noreferrer">
+          <a href={project.demo} target="_blank" rel="noreferrer" onClick={stopCardClick}>
             Live Demo
           </a>
         )}

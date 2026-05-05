@@ -74,8 +74,8 @@ textarea {
 
 .navbar--scrolled {
   /* background: color-mix(in srgb, var(--bg) 82%, transparent); */
-  background: linear-gradient(to top ,black,blue,transparent);
-  opacity: 1;
+  background: blue;
+  opacity: 0.7;
   border-bottom: 1px solid var(--line);
 }
 
@@ -278,16 +278,13 @@ textarea {
 }
 
 .profile-panel__avatar {
-  align-items: center;
   background: var(--text);
   border-radius: 8px;
-  color: var(--bg);
-  display: flex;
-  font-size: 3rem;
-  font-weight: 900;
-  height: 9rem;
-  justify-content: center;
-  width: 9rem;
+  display: block;
+  height: 11rem;
+  object-fit: cover;
+  object-position: center;
+  width: 11rem;
 }
 
 .profile-panel strong,
@@ -408,10 +405,27 @@ textarea {
 }
 
 .project-card {
+  background:
+    linear-gradient(180deg, rgba(8, 13, 21, 0.64), rgba(8, 13, 21, 0.86)),
+    var(--project-image, linear-gradient(145deg, color-mix(in srgb, var(--surface) 90%, white 3%), var(--surface)));
+  background-position: center;
+  background-size: cover;
+  cursor: pointer;
   display: flex;
   flex-direction: column;
   gap: 1.2rem;
   min-height: 315px;
+  overflow: hidden;
+}
+
+.project-card:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 4px;
+}
+
+.project-card > * {
+  position: relative;
+  z-index: 1;
 }
 
 .tag-list {
