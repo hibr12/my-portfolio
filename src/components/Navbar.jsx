@@ -19,7 +19,7 @@ function Navbar({ theme, onToggleTheme }) {
   return (
     <header className={`navbar ${scrolled ? 'navbar--scrolled' : ''}`}>
       <a className="navbar__brand" href="#home" onClick={handleNavClick}>
-        YN
+        Hibru
       </a>
 
       <nav className={`navbar__links ${isOpen ? 'navbar__links--open' : ''}`} aria-label="Main menu">
