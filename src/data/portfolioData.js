@@ -1,11 +1,11 @@
 export const projects = [
   {
-    title: 'Movie App (Full-Stack)',
+    title: 'Memory Game',
     description:
-      'A full-stack movie application that fetches movie data from an external API and allows users to register, log in, and save favorite movies.',
-    technologies: ['React', 'Node.js', 'Express', 'MongoDB', 'REST API'],
-    github: 'https://github.com/yourusername/movie-app',
-    demo: 'https://movie-app-demo.netlify.app',
+      'this is two-player memory game built with React, featuring a grid of cards that players flip to find matching pairs, with score tracking and a reset option.',
+    technologies: ['React', 'Node.js'],
+    github: 'https://github.com/hibr12/memorygame.git',
+    demo: 'https://e-learning-platform-bp4t.vercel.app/',
   },
   {
     title: 'Online Library System',
@@ -29,11 +29,11 @@ export const projects = [
     demo: 'https://e-learning-ui.vercel.app',
   },
   {
-    title: ' myPortfolio Website',
+    title: ' my Portfolio Website',
     description: 'Personal portfolio website showcasing skills, certificates, contact details, and projects.',
     technologies: ['React', 'CSS'],
     github: 'https://github.com/hibr12/my-portfolio.git',
-    demo: 'https://my-portfolio-mu-rosy-93.vercel.app/',
+    demo: 'https://my-portfolio-mu-rosy-93.vercel.app',
   },
 ];
 

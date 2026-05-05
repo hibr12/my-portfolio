@@ -385,6 +385,12 @@ textarea {
   transform: translateY(-7px);
 }
 
+.project-card:hover,
+.certificate-card:hover {
+  transform: translateY(-7px) scale(1.03);
+  z-index: 2;
+}
+
 .card:hover::before {
   opacity: 1;
   transform: scaleX(1);
