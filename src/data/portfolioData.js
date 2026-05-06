@@ -13,7 +13,7 @@ export const projects = [
     description: 'CRUD system for managing books and patrons with database integration and clean admin workflows.',
     technologies: ['React', 'Node.js', 'Express', 'MySQL'],
     github: 'https://github.com/hibr12/onlinelibrary.git',
-    demo: 'https://onlinelibrary.vercel.app',
+    demo: 'https://onlinelibrary-seven.vercel.app',
     image: '/assets/image/onlinelibrary.png',
   },
   {
