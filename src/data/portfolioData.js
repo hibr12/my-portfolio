@@ -18,7 +18,7 @@ export const projects = [
   },
   {
     title: 'Scientific Calculator',
-    description: 'A scientific calculator with advanced mathematical functions and a clean, intuitive interface.',
+    description: 'this is the mobile app for andriod and ios platform. A scientific calculator with advanced mathematical functions and a clean, intuitive interface.',
     technologies: ['c++', 'Dart', 'Swift', 'html','other'],
     github: 'https://github.com/hibr12/calculator-app.git',
     demo: 'https://scientific-calculator.vercel.app',
