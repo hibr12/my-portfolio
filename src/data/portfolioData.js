@@ -29,7 +29,7 @@ export const projects = [
     description: 'Responsive e-learning frontend with course filtering, reusable cards, and layout design.',
     technologies: ['React', 'CSS', 'JavaScript'],
     github: 'https://github.com/hibr12/e-learning-platform-hibrlearn.git',
-    demo: 'https://e-learning-ui.vercel.app',
+    demo: 'https://e-learning-2-livid.vercel.app',
     image: '/assets/image/e-learning.png',
   },
   {
