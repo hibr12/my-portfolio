@@ -438,6 +438,10 @@ textarea {
   padding: 1.4rem;
 }
 
+.project-card__summary {
+  flex: 1;
+}
+
 .tag-list {
   display: flex;
   flex-wrap: wrap;
@@ -471,6 +475,12 @@ textarea {
   padding-top: 1rem;
 }
 
+.project-card__actions {
+  bottom: 0;
+  justify-content: space-between;
+  width: 100%;
+}
+
 .card__actions a,
 .certificate-card button {
   background: none;
@@ -482,6 +492,40 @@ textarea {
   padding: 0;
   position: relative;
   text-align: left;
+}
+
+.card__actions .project-card__link {
+  align-items: center;
+  background: color-mix(in srgb, var(--surface-strong) 82%, var(--primary) 10%);
+  border: 1px solid color-mix(in srgb, var(--primary) 34%, var(--line));
+  border-radius: 8px;
+  color: var(--text);
+  display: inline-flex;
+  flex: 1 1 8.5rem;
+  justify-content: center;
+  min-height: 2.75rem;
+  padding: 0.68rem 0.9rem;
+  text-align: center;
+  transition: background 180ms ease, border-color 180ms ease, color 180ms ease, transform 180ms ease;
+}
+
+.card__actions .project-card__link--demo {
+  background: linear-gradient(135deg, var(--primary), #77eadf);
+  border-color: var(--primary);
+  color: #061113;
+}
+
+.card__actions .project-card__link:hover,
+.card__actions .project-card__link:focus-visible {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: #061113;
+  transform: translateY(-2px);
+}
+
+.card__actions .project-card__link:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 3px;
 }
 
 .card__actions a::after,

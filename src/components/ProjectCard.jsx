@@ -27,7 +27,7 @@ function ProjectCard({ project }) {
       <div className="project-card__image" aria-hidden="true" />
 
       <div className="project-card__content">
-        <div>
+        <div className="project-card__summary">
           <p className="eyebrow">Featured Project</p>
           <h3>{project.title}</h3>
           <p>{project.description}</p>
@@ -39,12 +39,24 @@ function ProjectCard({ project }) {
           ))}
         </div>
 
-        <div className="card__actions">
-          <a href={project.github} target="_blank" rel="noreferrer" onClick={stopCardClick}>
+        <div className="card__actions project-card__actions">
+          <a
+            className="project-card__link"
+            href={project.github}
+            target="_blank"
+            rel="noreferrer"
+            onClick={stopCardClick}
+          >
             GitHub
           </a>
           {project.demo && (
-            <a href={project.demo} target="_blank" rel="noreferrer" onClick={stopCardClick}>
+            <a
+              className="project-card__link project-card__link--demo"
+              href={project.demo}
+              target="_blank"
+              rel="noreferrer"
+              onClick={stopCardClick}
+            >
               Live Demo
             </a>
           )}
