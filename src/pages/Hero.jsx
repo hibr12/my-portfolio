@@ -31,8 +31,8 @@ function Hero() {
             <strong>React + Node.js</strong>
           </div>
           <div className="profile-panel__stats">
-            <span>5 Projects</span>
-            <span>3 Certificates</span>
+            <span>Projects</span>
+            <span>Certificates</span>
             <span>BDU Student</span>
           </div>
         </div>
