@@ -12,6 +12,9 @@ function Footer() {
         <a href="https://linkedin.com/in/yourusername" target="_blank" rel="noreferrer">
           LinkedIn
         </a>
+        <div className="phone">
+          <a href="tel:+251926673294">+251 926 673 294</a>
+        </div>
       </div>
       <p>Copyright © 2026 hibru yitayew. All rights reserved.</p>
     </footer>
