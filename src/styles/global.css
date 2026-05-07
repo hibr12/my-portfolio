@@ -405,17 +405,13 @@ textarea {
 }
 
 .project-card {
-  background:
-    linear-gradient(180deg, rgba(8, 13, 21, 0.64), rgba(8, 13, 21, 0.86)),
-    var(--project-image, linear-gradient(145deg, color-mix(in srgb, var(--surface) 90%, white 3%), var(--surface)));
-  background-position: center;
-  background-size: cover;
+  background: var(--surface);
   cursor: pointer;
   display: flex;
   flex-direction: column;
-  gap: 1.2rem;
-  min-height: 315px;
+  min-height: 430px;
   overflow: hidden;
+  padding: 0;
 }
 
 .project-card:focus-visible {
@@ -423,9 +419,22 @@ textarea {
   outline-offset: 4px;
 }
 
-.project-card > * {
-  position: relative;
-  z-index: 1;
+.project-card__image {
+  background:
+    linear-gradient(180deg, rgba(8, 13, 21, 0.04), rgba(8, 13, 21, 0.08)),
+    var(--project-image, linear-gradient(145deg, color-mix(in srgb, var(--surface) 90%, white 3%), var(--surface)));
+  background-position: center;
+  background-size: cover;
+  flex: 0 0 50%;
+  min-height: 215px;
+}
+
+.project-card__content {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 1.2rem;
+  padding: 1.4rem;
 }
 
 .tag-list {
