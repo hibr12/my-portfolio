@@ -2,9 +2,9 @@ function Hero() {
   return (
     <section className="hero section" id="home">
       <div className="hero__content reveal">
-        <p className="eyebrow">Available for internships and junior projects</p>
+        <p className="eyebrow">Hello, i am </p>
         <h1>hibru yitayew</h1>
-        <h2>Computer Science Student</h2>
+        <h2>Computer Science Student at bahir dar university</h2>
         <p>
           I am a passionate Computer Science student focused on building modern web and mobile
           applications using React, Node.js, and databases.
