@@ -49,17 +49,16 @@ function ProjectCard({ project }) {
           >
             GitHub
           </a>
-          {project.demo && (
-            <a
-              className="project-card__link project-card__link--demo"
-              href={project.demo}
-              target="_blank"
-              rel="noreferrer"
-              onClick={stopCardClick}
-            >
-              Live Demo
-            </a>
-          )}
+         <a
+  className="project-card__link project-card__link--demo"
+  href={project.demo || '#'}
+  target="_blank"
+  rel="noreferrer"
+  onClick={stopCardClick}
+>
+  Live Demo
+</a>
+
         </div>
       </div>
     </article>
