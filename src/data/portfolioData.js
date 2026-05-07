@@ -5,7 +5,7 @@ export const projects = [
       'this is two-player memory game built with React, featuring a grid of cards that players flip to find matching pairs, with score tracking and a reset option.',
     technologies: ['React', 'Node.js'],
     github: 'https://github.com/hibr12/memorygame.git',
-    demo: 'https://e-learning-platform-bp4t.vercel.app/',
+    // demo: 'https://e-learning-platform-bp4t.vercel.app/',
     image: '/assets/image/memorygame.png',
   },
   {
@@ -13,7 +13,7 @@ export const projects = [
     description: 'CRUD system for managing books and patrons with database integration and clean admin workflows.',
     technologies: ['React', 'Node.js', 'Express', 'MySQL'],
     github: 'https://github.com/hibr12/onlinelibrary.git',
-    demo: 'https://onlinelibrary-seven.vercel.app',
+    // demo: 'https://onlinelibrary-seven.vercel.app',
     image: '/assets/image/onlinelibrary.png',
   },
   {
@@ -21,7 +21,7 @@ export const projects = [
     description: 'this is the mobile app for andriod and ios platform. A scientific calculator with advanced mathematical functions and a clean, intuitive interface.',
     technologies: ['c++', 'Dart', 'Swift', 'html','other'],
     github: 'https://github.com/hibr12/calculator-app.git',
-    demo: 'https://scientific-calculator.vercel.app',
+    // demo: 'https://scientific-calculator.vercel.app',
     image: '/assets/image/calculator.png',
   },
   {
@@ -29,7 +29,7 @@ export const projects = [
     description: 'Responsive e-learning frontend with course filtering, reusable cards, and layout design.',
     technologies: ['React', 'CSS', 'JavaScript'],
     github: 'https://github.com/hibr12/e-learning-platform-hibrlearn.git',
-    demo: 'https://e-learning-2-livid.vercel.app',
+    // demo: 'https://e-learning-2-livid.vercel.app',
     image: '/assets/image/e-learning.png',
   },
   {
@@ -37,7 +37,7 @@ export const projects = [
     description: 'Personal portfolio website showcasing skills, certificates, contact details, and projects.',
     technologies: ['React', 'CSS'],
     github: 'https://github.com/hibr12/my-portfolio.git',
-    demo: 'https://my-portfolio-mu-rosy-93.vercel.app',
+    // demo: 'https://my-portfolio-mu-rosy-93.vercel.app',
   },
 ];
 
