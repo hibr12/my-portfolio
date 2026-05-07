@@ -33,7 +33,7 @@ function Hero() {
           <div className="profile-panel__stats">
             <span>Projects</span>
             <span>Certificates</span>
-            <span>BDU Student</span>
+            <span>passionate learner</span>
           </div>
         </div>
       </div>
