@@ -5,7 +5,7 @@ export const projects = [
       'this is two-player memory game built with React, featuring a grid of cards that players flip to find matching pairs, with score tracking and a reset option.',
     technologies: ['React', 'Node.js'],
     github: 'https://github.com/hibr12/memorygame.git',
-    demo: 'https://e-learning-platform-bp4t.vercel.app/',
+    demo: 'https://e-learning-platform-bp4t.vercel.app',
     image: '/assets/image/memorygame.png',
   },
   {

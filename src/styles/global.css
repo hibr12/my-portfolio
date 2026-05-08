@@ -509,11 +509,12 @@ textarea {
   outline-offset: 3px;
 }
 .github{
-  margin-top: 30px;
+border-radius: 50%;
+
 }
 
 .demo{
-  margin-top: 30px;
+  border-radius: 30%;
 }
 
 .card__actions a::after,
