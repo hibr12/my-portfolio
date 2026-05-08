@@ -18,7 +18,7 @@ export const projects = [
   },
 
    {
-    title: 'bankers algorithm and cpu scheduling',
+    title: 'bankers algorithm and cpu scheduling need brower to run',
     description: 'this project is a web based bankers algorithm and CPU scheduling simulation implementation',
     technologies: ['c++', 'Dart', 'Swift', 'html','other'],
     github: 'https://github.com/hibr12/calculator-app.git',
@@ -27,7 +27,7 @@ export const projects = [
   },
  
   {
-    title: 'E-learning UI',
+    title: 'E-learning UI need brower to run',
     description: 'Responsive e-learning frontend with course filtering, reusable cards, and layout design.',
     technologies: ['React', 'CSS', 'JavaScript'],
     github: 'https://github.com/hibr12/e-learning-platform-hibrlearn.git',
