@@ -19,20 +19,13 @@ export const projects = [
 
    {
     title: 'bankers algorithm and cpu scheduling',
-    description: 'this project is a web based simulation implementation of the bankers algorithm and CPU scheduling techniques. it combines cpu scheding algorithm and the bankers algorthim for deadlck avoidance',
+    description: 'this project is a web based bankers algorithm and CPU scheduling simulation implementation',
     technologies: ['c++', 'Dart', 'Swift', 'html','other'],
     github: 'https://github.com/hibr12/calculator-app.git',
     demo: 'https://cpu-scheduling-and-bankers-algorith.vercel.app',
     image: '/assets/image/calculator.png',
   },
-  // {
-  //   title: 'Scientific Calculator',
-  //   description: 'this is the mobile app for andriod and ios platform. A scientific calculator with advanced mathematical functions and a clean, intuitive interface.',
-  //   technologies: ['c++', 'Dart', 'Swift', 'html','other'],
-  //   github: 'https://github.com/hibr12/calculator-app.git',
-  //   demo: 'https://scientific-calculator.vercel.app',
-  //   image: '/assets/image/calculator.png',
-  // },
+ 
   {
     title: 'E-learning UI',
     description: 'Responsive e-learning frontend with course filtering, reusable cards, and layout design.',
