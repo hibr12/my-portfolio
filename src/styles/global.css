@@ -409,7 +409,7 @@ textarea {
   cursor: pointer;
   display: flex;
   flex-direction: column;
-  height: 700px;
+  height: 900px;
   overflow: hidden;
   padding: 0;
 }
