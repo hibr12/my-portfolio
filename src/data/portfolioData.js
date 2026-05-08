@@ -22,7 +22,7 @@ export const projects = [
     description: 'this project is a web based simulation implementation of the bankers algorithm and CPU scheduling techniques. it combines cpu scheding algorithm and the bankers algorthim for deadlck avoidance',
     technologies: ['c++', 'Dart', 'Swift', 'html','other'],
     github: 'https://github.com/hibr12/calculator-app.git',
-    demo: 'https://cpu-scheduling-and-bankers-algorith.vercel.app/',
+    demo: 'https://cpu-scheduling-and-bankers-algorith.vercel.app',
     image: '/assets/image/calculator.png',
   },
   // {
