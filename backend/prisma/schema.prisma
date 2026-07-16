@@ -1,0 +1,113 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model User {
+  id        Int      @id @default(autoincrement())
+  name      String   @db.VarChar(100)
+  email     String   @unique @db.VarChar(255)
+  password  String   @db.VarChar(255)
+  role      String   @default("admin") @db.VarChar(20)
+  avatar    String   @default("") @db.VarChar(500)
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("users")
+}
+
+model Project {
+  id           Int      @id @default(autoincrement())
+  title        String   @db.VarChar(200)
+  description  String   @db.Text
+  technologies String[]
+  github       String   @default("") @db.VarChar(500)
+  demo         String   @default("") @db.VarChar(500)
+  image        String   @default("") @db.VarChar(500)
+  featured     Boolean  @default(false)
+  order        Int      @default(0)
+  createdAt    DateTime @default(now()) @map("created_at")
+  updatedAt    DateTime @updatedAt @map("updated_at")
+
+  @@index([order])
+  @@map("projects")
+}
+
+model SkillGroup {
+  id        Int      @id @default(autoincrement())
+  title     String   @db.VarChar(100)
+  skills    String[]
+  order     Int      @default(0)
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@index([order])
+  @@map("skill_groups")
+}
+
+model Certificate {
+  id        Int      @id @default(autoincrement())
+  title     String   @db.VarChar(200)
+  issuer    String   @db.VarChar(200)
+  year      String   @db.VarChar(10)
+  image     String   @default("") @db.VarChar(500)
+  order     Int      @default(0)
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@index([order])
+  @@map("certificates")
+}
+
+model ContactMessage {
+  id        Int       @id @default(autoincrement())
+  name      String    @db.VarChar(100)
+  email     String    @db.VarChar(255)
+  message   String    @db.Text
+  status    String    @default("unread") @db.VarChar(20)
+  readAt    DateTime? @map("read_at")
+  repliedAt DateTime? @map("replied_at")
+  createdAt DateTime  @default(now()) @map("created_at")
+  updatedAt DateTime  @updatedAt @map("updated_at")
+
+  @@index([status])
+  @@index([createdAt(sort: Desc)])
+  @@map("contact_messages")
+}
+
+model SiteSetting {
+  id        Int      @id @default(autoincrement())
+  key       String   @unique @db.VarChar(100)
+  value     Json
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("site_settings")
+}
+
+model Analytics {
+  id              Int      @id @default(autoincrement())
+  visitorId       String   @map("visitor_id") @db.VarChar(100)
+  date            DateTime @db.Date
+  browser         String?  @db.VarChar(100)
+  os              String?  @db.VarChar(100)
+  device          String?  @db.VarChar(50)
+  screen          String?  @db.VarChar(50)
+  language        String?  @db.VarChar(50)
+  referrer        String?  @db.VarChar(500)
+  landingPage     String?  @map("landing_page") @db.VarChar(500)
+  sessionDuration Int      @default(0) @map("session_duration")
+  scrollDepth     Int      @default(0) @map("scroll_depth")
+  events          Json     @default("[]")
+  isReturning     Boolean  @default(false) @map("is_returning")
+  createdAt       DateTime @default(now()) @map("created_at")
+  updatedAt       DateTime @updatedAt @map("updated_at")
+
+  @@unique([visitorId, date])
+  @@index([visitorId])
+  @@index([date(sort: Desc)])
+  @@map("analytics")
+}
