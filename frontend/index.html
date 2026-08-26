@@ -5,12 +5,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
+    <!-- Preload critical font -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800;900&display=swap" as="style" crossorigin />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800;900&display=swap" rel="stylesheet" />
+
+    <!-- Preload hero image -->
+    <link rel="preload" as="image" href="/assets/image/hib2.jpg" fetchpriority="high" />
+    <link rel="preload" as="image" href="/assets/image/onlinelibrary.png" />
+    <link rel="preload" as="image" href="/assets/image/memorygame.png" />
+    <link rel="preload" as="image" href="/assets/image/e-learning.png" />
+    <link rel="preload" as="image" href="/assets/image/calculator.png" />
+
+    <!-- DNS prefetch for external resources -->
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
+
     <!-- Primary SEO -->
     <title>Hibru Yitayew | Computer Science Student & Full-Stack Developer</title>
     <meta name="description" content="Personal portfolio of Hibru Yitayew, a Computer Science student at Bahir Dar University focused on full-stack web and mobile app development using React, Node.js, and MongoDB." />
     <meta name="keywords" content="Hibru Yitayew, portfolio, web developer, full-stack developer, React, Node.js, MongoDB, Computer Science, Bahir Dar University" />
     <meta name="author" content="Hibru Yitayew" />
-    <meta name="robots" content="index, follow" />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
     <link rel="canonical" href="https://hibruyitayew.dev" />
 
     <!-- Open Graph / Facebook -->
@@ -19,6 +36,9 @@
     <meta property="og:title" content="Hibru Yitayew | Computer Science Student & Full-Stack Developer" />
     <meta property="og:description" content="Personal portfolio showcasing full-stack projects, skills, and certificates in web and mobile app development." />
     <meta property="og:image" content="/assets/image/hib2.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Hibru Yitayew - Full-Stack Developer Portfolio" />
     <meta property="og:site_name" content="Hibru Yitayew Portfolio" />
     <meta property="og:locale" content="en_US" />
 
@@ -27,6 +47,7 @@
     <meta name="twitter:title" content="Hibru Yitayew | Computer Science Student & Full-Stack Developer" />
     <meta name="twitter:description" content="Personal portfolio showcasing full-stack projects, skills, and certificates in web and mobile app development." />
     <meta name="twitter:image" content="/assets/image/hib2.jpg" />
+    <meta name="twitter:image:alt" content="Hibru Yitayew - Full-Stack Developer Portfolio" />
 
     <!-- Theme Color -->
     <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)" />
@@ -34,10 +55,6 @@
 
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%233dd6c6'/><text x='50' y='70' font-size='60' font-weight='bold' text-anchor='middle' fill='%23061113'>H</text></svg>" />
-
-    <!-- Preconnect -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 
     <!-- JSON-LD Structured Data -->
     <script type="application/ld+json">
@@ -47,6 +64,7 @@
       "name": "Hibru Yitayew",
       "url": "https://hibruyitayew.dev",
       "jobTitle": "Computer Science Student",
+      "description": "Full-stack web and mobile app developer specializing in React, Node.js, and MongoDB.",
       "affiliation": {
         "@type": "CollegeOrUniversity",
         "name": "Bahir Dar University"

@@ -113,7 +113,8 @@ class AnalyticsTracker {
       events,
     };
 
-    const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+    const isDev = import.meta.env.DEV || import.meta.env.MODE !== 'production';
+    const API_BASE = isDev ? '/api' : (import.meta.env.VITE_API_URL || 'http://localhost:5000/api');
 
     try {
       if (sync && navigator.sendBeacon) {

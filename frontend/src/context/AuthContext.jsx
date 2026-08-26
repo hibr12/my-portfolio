@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, useEffect, useCallback } from 'react';
+import { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react';
 import api from '../services/api.js';
 
 const AuthContext = createContext(null);
@@ -28,23 +28,29 @@ export function AuthProvider({ children }) {
     loadUser();
   }, [loadUser]);
 
-  const login = async (email, password) => {
+  const login = useCallback(async (email, password) => {
     const response = await api.login(email, password);
     localStorage.setItem('portfolio_token', response.data.token);
     setUser(response.data.user);
     return response;
-  };
+  }, []);
 
-  const logout = () => {
+  const logout = useCallback(() => {
     localStorage.removeItem('portfolio_token');
     setUser(null);
-  };
+  }, []);
 
-  const isAuthenticated = !!user;
-  const isAdmin = user?.role === 'admin';
+  const value = useMemo(() => ({
+    user,
+    loading,
+    login,
+    logout,
+    isAuthenticated: !!user,
+    isAdmin: user?.role === 'admin',
+  }), [user, loading, login, logout]);
 
   return (
-    <AuthContext.Provider value={{ user, loading, login, logout, isAuthenticated, isAdmin }}>
+    <AuthContext.Provider value={value}>
       {children}
     </AuthContext.Provider>
   );

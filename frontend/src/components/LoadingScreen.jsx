@@ -1,61 +1,61 @@
-import { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { memo, useCallback, useEffect, useRef, useState } from 'react';
+import { useData } from '../context/DataContext.jsx';
 
-function LoadingScreen() {
+const LoadingScreen = memo(function LoadingScreen() {
   const [progress, setProgress] = useState(0);
   const [visible, setVisible] = useState(true);
+  const intervalRef = useRef(null);
+  const { loading } = useData();
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setProgress((prev) => {
-        if (prev >= 100) {
-          clearInterval(interval);
-          setTimeout(() => setVisible(false), 400);
-          return 100;
-        }
-        return prev + Math.random() * 15 + 5;
-      });
-    }, 120);
-
-    return () => clearInterval(interval);
+  const hide = useCallback(() => {
+    setVisible(false);
   }, []);
 
+  useEffect(() => {
+    intervalRef.current = setInterval(() => {
+      setProgress((prev) => {
+        if (prev >= 100) {
+          clearInterval(intervalRef.current);
+          setTimeout(hide, 300);
+          return 100;
+        }
+        return prev + Math.random() * 18 + 7;
+      });
+    }, 100);
+
+    return () => {
+      if (intervalRef.current) clearInterval(intervalRef.current);
+    };
+  }, [hide]);
+
+  // Hide loading screen when data is loaded (or after minimum time)
+  useEffect(() => {
+    if (!loading) {
+      // Ensure minimum display time
+      setProgress(100);
+    }
+  }, [loading]);
+
+  if (!visible) return null;
+
   return (
-    <AnimatePresence>
-      {visible && (
-        <motion.div
-          className="loading-screen"
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.5 }}
-        >
-          <div className="loading-screen__content">
-            <motion.div
-              className="loading-screen__brand"
-              initial={{ scale: 0.5, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              transition={{ duration: 0.5, ease: 'easeOut' }}
-            >
-              H
-            </motion.div>
-            <motion.div
-              className="loading-screen__bar"
-              initial={{ width: 0 }}
-              animate={{ width: `${Math.min(progress, 100)}%` }}
-              transition={{ duration: 0.2 }}
-            />
-            <motion.p
-              className="loading-screen__text"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.3 }}
-            >
-              Loading portfolio...
-            </motion.p>
-          </div>
-        </motion.div>
-      )}
-    </AnimatePresence>
+    <div
+      className="loading-screen"
+      style={{ opacity: progress >= 100 ? 0 : 1, transition: 'opacity 300ms ease' }}
+      role="status"
+      aria-live="polite"
+      aria-label="Loading portfolio"
+    >
+      <div className="loading-screen__content">
+        <div className="loading-screen__brand">H</div>
+        <div
+          className="loading-screen__bar"
+          style={{ width: `${Math.min(progress, 100)}%` }}
+        />
+        <p className="loading-screen__text">Loading portfolio...</p>
+      </div>
+    </div>
   );
-}
+});
 
 export default LoadingScreen;

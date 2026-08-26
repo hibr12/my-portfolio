@@ -1,4 +1,15 @@
-const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+function getApiBase() {
+  if (typeof window !== 'undefined') {
+    const hostname = window.location.hostname;
+    if (hostname === 'localhost' || hostname === '127.0.0.1' || hostname.endsWith('.vercel.app')) {
+      return '/api';
+    }
+  }
+  return import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+}
+
+const API_BASE = getApiBase();
+const API_TIMEOUT = 5000; // 5 second timeout
 
 class ApiService {
   constructor() {
@@ -30,25 +41,41 @@ class ApiService {
       headers.Authorization = `Bearer ${token}`;
     }
 
-    const response = await fetch(url, {
-      ...options,
-      headers,
-    });
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), API_TIMEOUT);
 
-    if (response.status === 204) {
-      return { success: true };
-    }
+    try {
+      const response = await fetch(url, {
+        ...options,
+        headers,
+        signal: controller.signal,
+      });
 
-    const data = await response.json();
+      clearTimeout(timeoutId);
 
-    if (!response.ok) {
-      const error = new Error(data.message || 'Request failed');
-      error.status = response.status;
-      error.errors = data.errors || [];
+      if (response.status === 204) {
+        return { success: true };
+      }
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        const error = new Error(data.message || 'Request failed');
+        error.status = response.status;
+        error.errors = data.errors || [];
+        throw error;
+      }
+
+      return data;
+    } catch (error) {
+      clearTimeout(timeoutId);
+      if (error.name === 'AbortError') {
+        const timeoutError = new Error('Request timeout');
+        timeoutError.status = 408;
+        throw timeoutError;
+      }
       throw error;
     }
-
-    return data;
   }
 
   get(endpoint) {

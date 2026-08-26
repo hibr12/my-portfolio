@@ -1,0 +1,5 @@
+PostgreSQL connected via Prisma
+[WARN] 2026-08-24T08:40:00.682Z Email service not configured. Set EMAIL_HOST and EMAIL_USER in .env
+[INFO] 2026-08-24T08:40:00.690Z Server running on port 5000
+[INFO] 2026-08-24T08:40:00.690Z Environment: development
+[INFO] 2026-08-24T08:40:00.690Z API base URL: http://localhost:5000/api

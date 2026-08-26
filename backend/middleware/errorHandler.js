@@ -5,6 +5,17 @@ const errorHandler = (error, req, res, next) => {
   const statusCode = error.statusCode || 500;
   const message = error.isOperational ? error.message : 'Internal server error';
 
+  // Always log full error for debugging
+  console.error('ERROR:', {
+    statusCode,
+    message: error.message,
+    stack: error.stack,
+    code: error.code,
+    meta: error.meta,
+    path: req.path,
+    method: req.method,
+  });
+
   if (statusCode === 500) {
     logger.error('Unexpected error:', error);
   } else {

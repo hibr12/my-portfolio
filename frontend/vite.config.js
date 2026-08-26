@@ -4,6 +4,8 @@ import react from '@vitejs/plugin-react';
 export default defineConfig({
   plugins: [react()],
   build: {
+    target: 'es2020',
+    minify: 'esbuild',
     rollupOptions: {
       output: {
         manualChunks: {
@@ -15,6 +17,8 @@ export default defineConfig({
     },
     chunkSizeWarningLimit: 1000,
     sourcemap: false,
+    cssCodeSplit: true,
+    reportCompressedSize: false,
   },
   server: {
     proxy: {
@@ -27,5 +31,20 @@ export default defineConfig({
         changeOrigin: true,
       },
     },
+  },
+  preview: {
+    proxy: {
+      '/api': {
+        target: 'http://localhost:5000',
+        changeOrigin: true,
+      },
+      '/uploads': {
+        target: 'http://localhost:5000',
+        changeOrigin: true,
+      },
+    },
+  },
+  optimizeDeps: {
+    include: ['react', 'react-dom', 'react-router-dom'],
   },
 });

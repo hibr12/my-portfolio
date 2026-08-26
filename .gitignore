@@ -5,3 +5,8 @@ dist
 .env.local
 uploads/
 .vercel
+note.md
+note2.md
+ui-update-prompt.md
+ui.md
+wrong.md

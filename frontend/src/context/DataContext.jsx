@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, useEffect, useCallback } from 'react';
+import { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react';
 import api from '../services/api.js';
 import { projects as fallbackProjects, skillGroups as fallbackSkillGroups, certificates as fallbackCertificates } from '../data/portfolioData.js';
 
@@ -59,9 +59,11 @@ export function DataProvider({ children }) {
   const [skillGroups, setSkillGroups] = useState(fallbackSkillGroups);
   const [certificates, setCertificates] = useState(fallbackCertificates);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   const loadAll = useCallback(async () => {
     try {
+      setError(null);
       const [settingsRes, projectsRes, skillsRes, certsRes] = await Promise.allSettled([
         api.getSettings(),
         api.getProjects(),
@@ -69,23 +71,42 @@ export function DataProvider({ children }) {
         api.getCertificates(),
       ]);
 
+      let hasAnyError = false;
+
       if (settingsRes.status === 'fulfilled' && settingsRes.value?.data) {
         setSettings((prev) => ({ ...prev, ...settingsRes.value.data }));
+      } else if (settingsRes.status === 'rejected') {
+        hasAnyError = true;
+        console.warn('Failed to load settings:', settingsRes.reason);
       }
 
       if (projectsRes.status === 'fulfilled' && projectsRes.value?.data?.length > 0) {
         setProjects(projectsRes.value.data);
+      } else if (projectsRes.status === 'rejected') {
+        hasAnyError = true;
+        console.warn('Failed to load projects:', projectsRes.reason);
       }
 
       if (skillsRes.status === 'fulfilled' && skillsRes.value?.data?.length > 0) {
         setSkillGroups(skillsRes.value.data);
+      } else if (skillsRes.status === 'rejected') {
+        hasAnyError = true;
+        console.warn('Failed to load skills:', skillsRes.reason);
       }
 
       if (certsRes.status === 'fulfilled' && certsRes.value?.data?.length > 0) {
         setCertificates(certsRes.value.data);
+      } else if (certsRes.status === 'rejected') {
+        hasAnyError = true;
+        console.warn('Failed to load certificates:', certsRes.reason);
       }
-    } catch {
-      // Use fallback data
+
+      if (hasAnyError) {
+        setError('Some data could not be loaded from the server. Showing cached/fallback data.');
+      }
+    } catch (err) {
+      setError('Failed to load data. Showing fallback data.');
+      console.error('Data loading error:', err);
     } finally {
       setLoading(false);
     }
@@ -93,8 +114,13 @@ export function DataProvider({ children }) {
 
   useEffect(() => { loadAll(); }, [loadAll]);
 
+  const value = useMemo(
+    () => ({ settings, projects, skillGroups, certificates, loading, error, retry: loadAll }),
+    [settings, projects, skillGroups, certificates, loading, error]
+  );
+
   return (
-    <DataContext.Provider value={{ settings, projects, skillGroups, certificates, loading }}>
+    <DataContext.Provider value={value}>
       {children}
     </DataContext.Provider>
   );

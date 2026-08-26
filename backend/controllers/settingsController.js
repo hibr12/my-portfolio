@@ -1,5 +1,6 @@
 import prisma from '../config/prisma.js';
 import ApiResponse from '../utils/ApiResponse.js';
+import { withRetry } from '../utils/withRetry.js';
 
 const DEFAULT_SETTINGS = {
   hero: {
@@ -61,7 +62,7 @@ const DEFAULT_SETTINGS = {
 
 export const get = async (req, res, next) => {
   try {
-    const settings = await prisma.siteSetting.findMany();
+    const settings = await withRetry(() => prisma.siteSetting.findMany());
     const result = { ...DEFAULT_SETTINGS };
 
     settings.forEach((s) => {
@@ -70,18 +71,20 @@ export const get = async (req, res, next) => {
 
     return ApiResponse.success(res, result);
   } catch (error) {
+    console.error('GET /api/settings error:', error);
     next(error);
   }
 };
 
 export const getByKey = async (req, res, next) => {
   try {
-    const setting = await prisma.siteSetting.findUnique({
+    const setting = await withRetry(() => prisma.siteSetting.findUnique({
       where: { key: req.params.key },
-    });
+    }));
     const value = setting ? setting.value : DEFAULT_SETTINGS[req.params.key];
     return ApiResponse.success(res, value);
   } catch (error) {
+    console.error('GET /api/settings/:key error:', error);
     next(error);
   }
 };
@@ -91,14 +94,15 @@ export const update = async (req, res, next) => {
     const { key } = req.params;
     const { value } = req.body;
 
-    const setting = await prisma.siteSetting.upsert({
+    const setting = await withRetry(() => prisma.siteSetting.upsert({
       where: { key },
       update: { value },
       create: { key, value },
-    });
+    }));
 
     return ApiResponse.success(res, setting.value, 'Settings updated');
   } catch (error) {
+    console.error('PUT /api/settings/:key error:', error);
     next(error);
   }
 };
@@ -107,7 +111,7 @@ export const updateMany = async (req, res, next) => {
   try {
     const { settings } = req.body;
 
-    await prisma.$transaction(
+    await withRetry(() => prisma.$transaction(
       Object.entries(settings).map(([key, value]) =>
         prisma.siteSetting.upsert({
           where: { key },
@@ -115,10 +119,11 @@ export const updateMany = async (req, res, next) => {
           create: { key, value },
         })
       )
-    );
+    ));
 
     return ApiResponse.success(res, null, 'Settings updated');
   } catch (error) {
+    console.error('PUT /api/settings error:', error);
     next(error);
   }
 };
