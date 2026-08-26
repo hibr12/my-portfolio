@@ -119,6 +119,10 @@ process.on('uncaughtException', (error) => {
   process.exit(1);
 });
 
+app.get('/', (req, res) => {
+  res.send('Portfolio API Server is Running');
+});
+
 const start = async () => {
   await connectDB();
   await emailService.init();
