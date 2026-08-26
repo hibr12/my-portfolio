@@ -23,7 +23,7 @@ const env = {
   BCRYPT_ROUNDS: parseInt(process.env.BCRYPT_ROUNDS, 10) || 12,
   CORS_ORIGIN: process.env.CORS_ORIGIN || 'http://localhost:5173',
   EMAIL_HOST: process.env.EMAIL_HOST || '',
-  EMAIL_PORT: parseInt(process.env.EMAIL_PORT, 10) || 587,
+  EMAIL_PORT: parseInt(process.env.EMAIL_PORT, 10) || 465,
   EMAIL_USER: process.env.EMAIL_USER || '',
   EMAIL_PASS: process.env.EMAIL_PASS || '',
   EMAIL_FROM: process.env.EMAIL_FROM || '',

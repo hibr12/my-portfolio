@@ -119,19 +119,49 @@ process.on('uncaughtException', (error) => {
   process.exit(1);
 });
 
+
+
+// 1. Root route placed BEFORE error handling & 404 catches
 app.get('/', (req, res) => {
   res.send('Portfolio API Server is Running');
 });
 
-const start = async () => {
-  await connectDB();
-  await emailService.init();
+app.use('/api/*', (req, res) => {
+  res.status(404).json({ success: false, message: 'API endpoint not found' });
+});
 
-  app.listen(env.PORT, () => {
-    logger.info(`Server running on port ${env.PORT}`);
-    logger.info(`Environment: ${env.NODE_ENV || 'development'}`);
-    logger.info(`API base URL: http://localhost:${env.PORT}/api`);
-  });
+app.use(errorHandler);
+
+process.on('unhandledRejection', (reason, promise) => {
+  logger.error('Unhandled Rejection:', reason);
+});
+
+process.on('uncaughtException', (error) => {
+  logger.error('Uncaught Exception:', error);
+  process.exit(1);
+});
+
+// 2. Optimized async startup execution
+const start = async () => {
+  try {
+    await connectDB();
+
+    // Start listening on the port IMMEDIATELY for Render health checks
+    app.listen(env.PORT, () => {
+      logger.info(`Server running on port ${env.PORT}`);
+      logger.info(`Environment: ${env.NODE_ENV || 'development'}`);
+      logger.info(`API base URL: http://localhost:${env.PORT}/api`);
+    });
+
+    // Initialize email service in the background WITHOUT 'await'
+    emailService.init().catch((err) => {
+      logger.warn(`Email service setup warning: ${err.message}`);
+    });
+
+  } catch (error) {
+    logger.error('Failed to start server:', error);
+    process.exit(1);
+  }
 };
 
 start();
