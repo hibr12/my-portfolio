@@ -1,8 +1,18 @@
 function getApiBase() {
   if (typeof window !== 'undefined') {
     const hostname = window.location.hostname;
-    if (hostname === 'localhost' || hostname === '127.0.0.1' || hostname.endsWith('.vercel.app')) {
+    const isLocalhost = hostname === 'localhost' || hostname === '127.0.0.1';
+    const isVercel = hostname.endsWith('.vercel.app');
+
+    if (isLocalhost) {
       return '/api';
+    }
+
+    if (isVercel) {
+      if (import.meta.env.VITE_API_URL) {
+        return import.meta.env.VITE_API_URL;
+      }
+      console.warn('VITE_API_URL not set. API calls will fail on Vercel. Set VITE_API_URL to your Render backend URL (e.g., https://portfolio-backend.onrender.com/api)');
     }
   }
   return import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
@@ -57,7 +67,29 @@ class ApiService {
         return { success: true };
       }
 
-      const data = await response.json();
+      const contentType = response.headers.get('content-type');
+      const isJson = contentType && contentType.includes('application/json');
+
+      let data;
+      if (isJson) {
+        data = await response.json();
+      } else {
+        const text = await response.text();
+        console.error('Non-JSON response received:', {
+          status: response.status,
+          contentType,
+          url,
+          preview: text.slice(0, 200),
+        });
+        const error = new Error(
+          response.ok
+            ? 'Server returned an invalid response format'
+            : `Request failed with status ${response.status}: ${text.slice(0, 100) || 'Unknown error'}`
+        );
+        error.status = response.status;
+        error.isNonJsonResponse = true;
+        throw error;
+      }
 
       if (!response.ok) {
         const error = new Error(data.message || 'Request failed');
@@ -120,7 +152,22 @@ class ApiService {
       body: formData,
     });
 
-    const data = await response.json();
+    const contentType = response.headers.get('content-type');
+    const isJson = contentType && contentType.includes('application/json');
+
+    let data;
+    if (isJson) {
+      data = await response.json();
+    } else {
+      const text = await response.text();
+      console.error('Non-JSON upload response:', {
+        status: response.status,
+        contentType,
+        preview: text.slice(0, 200),
+      });
+      throw new Error(`Upload failed with status ${response.status}: ${text.slice(0, 100) || 'Unknown error'}`);
+    }
+
     if (!response.ok) {
       throw new Error(data.message || 'Upload failed');
     }

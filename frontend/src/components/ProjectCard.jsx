@@ -1,23 +1,9 @@
 import { memo, useCallback, useMemo } from 'react';
-import { trackClick } from '../hooks/useAnalytics.js';
 
-const ENTRANCE_DIRECTIONS = [
-  'reveal-slide-left',
-  'reveal-slide-right',
-  'reveal-slide-up',
-  'reveal-scale',
-  'reveal-flip-x',
-];
-
-function getDirectionForIndex(index) {
-  return ENTRANCE_DIRECTIONS[index % ENTRANCE_DIRECTIONS.length];
-}
-
-const ProjectCard = memo(function ProjectCard({ project, index = 0, parentInView = false }) {
+const ProjectCard = memo(function ProjectCard({ project, index = 0 }) {
   const openGithub = useCallback(() => {
-    trackClick(`github:${project.title}`);
     window.open(project.github, '_blank', 'noopener,noreferrer');
-  }, [project.github, project.title]);
+  }, [project.github]);
 
   const handleKeyDown = useCallback((event) => {
     if (event.key === 'Enter' || event.key === ' ') {
@@ -26,16 +12,19 @@ const ProjectCard = memo(function ProjectCard({ project, index = 0, parentInView
     }
   }, [openGithub]);
 
-  const stopCardClick = useCallback((event) => {
-    event.stopPropagation();
-  }, []);
-
-  const directionClass = useMemo(() => getDirectionForIndex(index), [index]);
-  const delayClass = index <= 11 ? `reveal-delay-${index + 1}` : '';
+  const directionClass = useMemo(() => {
+    const directions = [
+      'reveal-slide-left',
+      'reveal-slide-right',
+      'reveal-slide-up',
+      'reveal-scale',
+    ];
+    return directions[index % directions.length];
+  }, [index]);
 
   return (
     <article
-      className={`card project-card project-card-3d ${directionClass} ${delayClass} ${parentInView ? 'is-visible' : ''}`}
+      className={`card project-card ${directionClass}`}
       style={project.image ? { '--project-image': `url(${project.image})` } : undefined}
       role="link"
       tabIndex={0}
@@ -50,8 +39,6 @@ const ProjectCard = memo(function ProjectCard({ project, index = 0, parentInView
             alt={`${project.title} screenshot`}
             loading="lazy"
             decoding="async"
-            width="400"
-            height="200"
           />
         )}
       </div>
@@ -75,7 +62,7 @@ const ProjectCard = memo(function ProjectCard({ project, index = 0, parentInView
             href={project.github}
             target="_blank"
             rel="noopener noreferrer"
-            onClick={(e) => { stopCardClick(e); trackClick(`github:${project.title}`); }}
+            onClick={(e) => window.open(project.github, '_blank', 'noopener,noreferrer')}
           >
             GitHub
           </a>
@@ -85,7 +72,6 @@ const ProjectCard = memo(function ProjectCard({ project, index = 0, parentInView
               href={project.demo}
               target="_blank"
               rel="noopener noreferrer"
-              onClick={(e) => { stopCardClick(e); trackClick(`demo:${project.title}`); }}
             >
               Live Demo
             </a>
