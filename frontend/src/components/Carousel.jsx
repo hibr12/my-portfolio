@@ -1,4 +1,4 @@
-import { memo, useCallback, useState, useEffect } from 'react';
+import { memo, useCallback, useRef, useState, useEffect } from 'react';
 import ProjectCard from './ProjectCard.jsx';
 
 const INITIAL_DELAY = 100;

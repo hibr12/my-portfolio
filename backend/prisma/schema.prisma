@@ -22,7 +22,7 @@ model User {
 model Project {
   id           Int      @id @default(autoincrement())
   title        String   @db.VarChar(200)
-  description  String   @db.Text
+  description  String
   technologies String[]
   github       String   @default("") @db.VarChar(500)
   demo         String   @default("") @db.VarChar(500)
@@ -66,7 +66,7 @@ model ContactMessage {
   id        Int       @id @default(autoincrement())
   name      String    @db.VarChar(100)
   email     String    @db.VarChar(255)
-  message   String    @db.Text
+  message   String
   status    String    @default("unread") @db.VarChar(20)
   readAt    DateTime? @map("read_at")
   repliedAt DateTime? @map("replied_at")

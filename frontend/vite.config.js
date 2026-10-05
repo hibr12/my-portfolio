@@ -6,15 +6,6 @@ export default defineConfig({
   build: {
     target: 'es2020',
     minify: 'esbuild',
-    rollupOptions: {
-      output: {
-        manualChunks: {
-          'vendor-react': ['react', 'react-dom', 'react-router-dom'],
-          'vendor-motion': ['framer-motion'],
-          'vendor-three': ['three', '@react-three/fiber', '@react-three/drei'],
-        },
-      },
-    },
     chunkSizeWarningLimit: 1000,
     sourcemap: false,
     cssCodeSplit: true,

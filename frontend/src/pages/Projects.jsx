@@ -1,5 +1,6 @@
 import { memo } from 'react';
 import { useData } from '../context/DataContext.jsx';
+import { useInView } from '../hooks/useInView.js';
 import Carousel from '../components/Carousel.jsx';
 import SectionHeading from '../components/SectionHeading.jsx';
 
